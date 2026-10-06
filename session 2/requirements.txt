@@ -1,0 +1,4 @@
+anthropic>=1.11,<2
+python-dotenv>=1.2,<2
+ollama>=0.6,<1
+pydantic>=2.13,<3
