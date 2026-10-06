@@ -107,7 +107,7 @@ def run_agent(question: str, system: str = SYSTEM, tools: list = TOOLS) -> str:
         if response.stop_reason != "tool_use":                                # THINK done -> answer
             return "".join(b.text for b in response.content if b.type == "text")
 
-        results = []
+        results = [] # Tool Results
         for block in response.content:
             if block.type == "tool_use":                                       # ACT
                 output, is_error = run_tool(block.name, block.input)
@@ -120,5 +120,5 @@ def run_agent(question: str, system: str = SYSTEM, tools: list = TOOLS) -> str:
 
 
 if __name__ == "__main__":
-    question = " ".join(sys.argv[1:]) or "Is ACME over its processing limit?"
+    question = " ".join(sys.argv[1:]) or "Is ACME over its processing limit? and can you compare the batchs Acme and bolt in table"
     print("\nANSWER:", run_agent(question))
