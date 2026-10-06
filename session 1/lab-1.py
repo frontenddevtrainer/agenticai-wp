@@ -6,6 +6,7 @@ load_dotenv()
 LOCAL = os.getenv("OLLAMA_MODEL", "gemma3:1b")
 CLAUDE = os.getenv("ANTHROPIC_MODEL", "claude-haiku-4-5")
 
+CONTEXT = []
 
 SYSTEM = "You are a payments operations assistant at Northstar Pay. Answer in at most 4 sentences."
 PROMPTS = [
@@ -43,7 +44,7 @@ def ask_local(prompt):
 for prompt in PROMPTS:
     print(f"Prompt: {prompt}")
     print(f"Local Response: {ask_local(prompt)}")
-    print(f"Claude Response: {ask_claude(prompt)}")
+    # print(f"Claude Response: {ask_claude(prompt)}")
     time.sleep(1)
 
 
