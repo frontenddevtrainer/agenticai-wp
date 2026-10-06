@@ -17,7 +17,7 @@ PROMPTS = [
 ]
 
 #Anthrophic API Chat
-claude = anthropic.Anthropic()
+claude = anthropic.Anthropic(base_url="https://api.openrouter.ai/v1",)
 def ask_claude(prompt):
     response = claude.messages.create(
         model = CLAUDE,

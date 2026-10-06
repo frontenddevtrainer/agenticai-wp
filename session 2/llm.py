@@ -4,12 +4,11 @@ import os
 import anthropic
 from dotenv import load_dotenv
 
-load_dotenv() # reads OPENROUTER_API_KEY (and optional MODEL) from .env
+load_dotenv()  # reads OPENROUTER_API_KEY (and optional MODEL) from .env
 
 # The official Anthropic SDK, pointed at OpenRouter's Anthropic-compatible endpoint
 client = anthropic.Anthropic(
-    auth_token=os.getenv("OPENROUTER_API_KEY"),
-    base_url="https://api.openrouter.ai/v1",
+    base_url=os.getenv("BASE_URL", "https://openrouter.ai/api"),
+    auth_token=os.environ["OPENROUTER_API_KEY"],
 )
-
 MODEL = os.getenv("MODEL", "anthropic/claude-haiku-4.5")
