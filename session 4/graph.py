@@ -7,15 +7,14 @@ from typing_extensions import TypedDict
 from pydantic import BaseModel
 from langchain_openrouter import ChatOpenRouter      # Claude via OpenRouter
 from langchain_core.messages import AnyMessage, SystemMessage
-
-
-
-
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from tools_lc import TOOLS                     # Day 3 @tool functions
 
+
+
+# Global State shared between agents. its custom state you can design this according to your requirements.
 class MeridianState(TypedDict):
     messages: Annotated[list[AnyMessage], add_messages]
     route: Literal["direct", "agent"] | None
@@ -34,10 +33,10 @@ class Route(BaseModel):
 classifier = llm.with_structured_output(Route)
 
 def classify(state: MeridianState):
-    r = classifier.invoke([SystemMessage(
+    response = classifier.invoke([SystemMessage(
         "Route to 'direct' if the question is a definition/concept answerable without Northstar data. "
         "Route to 'agent' if it needs merchant data, FX rates, or calculations."), state["messages"][-1]])
-    return {"route": r.route}
+    return {"route": response.route}
 
 # --- node 2a: direct answer ---
 def answer_direct(state: MeridianState):
@@ -56,7 +55,7 @@ builder.add_node("tools", ToolNode(TOOLS))     # executes tool calls, returns To
 
 builder.add_edge(START, "classify")
 
-builder.add_conditional_edges("classify", lambda s: s["route"],
+builder.add_conditional_edges("classify", lambda state: state["route"],
                               {"direct": "answer_direct", "agent": "call_model"})
 
 builder.add_edge("answer_direct", END)
