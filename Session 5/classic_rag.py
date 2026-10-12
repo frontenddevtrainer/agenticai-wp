@@ -18,7 +18,7 @@ def format_docs(docs) -> str:
 
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", "Answer using ONLY the context. Cite sources in [brackets].\n\nContext:\n{context}"),
+    ("system", "Answer using ONLY the context. Cite sources in [brackets].\n\nContext:\n{context}, Add all the citation and source as list at the end of the anwser."),
     ("human", "{question}"),
 ])
 rag = ({"context": retriever | format_docs, "question": RunnablePassthrough()} | prompt | chat_model(max_tokens=4000) | StrOutputParser())
