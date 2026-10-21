@@ -13,7 +13,7 @@ from starlette.applications import Starlette
 
 from critic_a2a.agent_executor import CriticExecutor
 
-HOST, PORT = os.getenv("A2A_HOST", "127.0.0.1"), int(os.getenv("A2A_PORT", "9999"))
+HOST, PORT = os.getenv("A2A_HOST", "127.0.0.1"), int(os.getenv("A2A_PORT", "8888"))
 PUBLIC_URL = os.getenv("A2A_PUBLIC_URL", f"http://{HOST}:{PORT}")
 
 skill = AgentSkill(
