@@ -1,0 +1,5 @@
+# Tiny sandbox image: only the parser, no secrets, no network at runtime (enforced by `docker run --network none`).
+FROM python:3.13-slim
+RUN pip install --no-cache-dir pypdf==6.*
+COPY evidence_parser.py /parser/evidence_parser.py
+ENTRYPOINT ["python", "/parser/evidence_parser.py"]
