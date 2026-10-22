@@ -1,0 +1,106 @@
+[
+  {
+    "id": "acme-over",
+    "run": 0,
+    "outcome": false,
+    "traj_required": false,
+    "traj_forbidden": true,
+    "traj_efficient": true,
+    "calls": [],
+    "verdict": "OK",
+    "final": "{\"merchant_id\": \"[ADDRESS]\", \"mtd_volume\": 0, \"limit\": 0, \"currency\": \"USD\", \"utilisation_pct\": 0, \"verdict\": \"OK\", \"rationale\": \"No merchant ID was provided - [ADDRESS] is not a valid merchant identifier. Please provide a numeric or alphanumeric merchant ID to check processing limits.\"}",
+    "error": false,
+    "cheap": {
+      "faithful": false,
+      "currency_ok": false,
+      "clear_verdict": false,
+      "reason": "The agent failed to process the query - it returned placeholder [ADDRESS] values instead of actual data, provided no tools were called to retrieve merchant information, and the verdict \"OK\" is unsupported by missing/invalid data."
+    },
+    "strong": {
+      "faithful": false,
+      "currency_ok": false,
+      "clear_verdict": false,
+      "reason": "Agent failed to process the query - returned a template response with [ADDRESS] placeholders instead of actual data, provided no real analysis, and no tools were called despite being available."
+    },
+    "tokens": 1455,
+    "seconds": 10.4
+  },
+  {
+    "id": "bolt-ok",
+    "run": 0,
+    "outcome": true,
+    "traj_required": false,
+    "traj_forbidden": true,
+    "traj_efficient": true,
+    "calls": [
+      "lookup_merchant"
+    ],
+    "verdict": "OK",
+    "final": " {\"merchant_id\": \"BOLT\", \"mtd_volume\": 3354000.5, \"limit\": 5000000, \"currency\": \"GBP\", \"utilisation_pct\": 67.08, \"verdict\": \"OK\", \"rationale\": \"BOLT has processed GBP 3,354,000.50 MTD against a GBP 5,000,000 monthly limit (67.08% utilisation). The merchant is well within acceptable thresholds and not yet near the 90% warning level.\"}",
+    "error": false,
+    "cheap": {
+      "faithful": true,
+      "currency_ok": true,
+      "clear_verdict": true,
+      "reason": "BOLT has processed GBP 3,354,000.50 against a GBP 5,000,000 limit (67.08% utilisation), meaning it is NOT over its processing limit with appropriate supporting calculations and currency consistency."
+    },
+    "strong": {
+      "faithful": true,
+      "currency_ok": true,
+      "clear_verdict": true,
+      "reason": "BOLT's MTD volume (GBP 3,354,000.50) is below its limit (GBP 5,000,000) at 67.08% utilisation, therefore not over its processing limit."
+    },
+    "tokens": 3193,
+    "seconds": 16.4
+  },
+  {
+    "id": "crux-over",
+    "run": 0,
+    "outcome": false,
+    "traj_required": true,
+    "traj_forbidden": true,
+    "traj_efficient": true,
+    "calls": [
+      "lookup_merchant",
+      "get_fx_rate"
+    ],
+    "verdict": "OK",
+    "final": "{\"merchant_id\":\"CRUX\",\"mtd_volume\":650650000,\"limit\":800000000,\"currency\":\"INR\",\"utilisation_pct\":81.33,\"verdict\":\"OK\",\"rationale\":\"CRUX has processed 650,650,000 INR MTD (650M INR from batch B-3001 + 2M USD converted to 170M INR from batch B-3002 at FX rate of 85.0), against a monthly limit of 800M INR. Utilisation is 81.33%, which is below the 90% near-limit threshold.\"}",
+    "error": false,
+    "cheap": {
+      "faithful": true,
+      "currency_ok": true,
+      "clear_verdict": true,
+      "reason": "CRUX at 81.33% utilization (650.65M INR of 800M INR limit) is below the 90% threshold, correctly concluding NOT over limit."
+    },
+    "strong": {
+      "faithful": true,
+      "currency_ok": true,
+      "clear_verdict": true,
+      "reason": "CRUX's 81.33% utilization (650.65M INR of 800M INR limit) is correctly calculated and below the 90% threshold; verdict \"OK\" is accurate."
+    },
+    "tokens": 5272,
+    "seconds": 16.1
+  },
+  {
+    "id": "unknown-merchant",
+    "run": 0,
+    "outcome": true,
+    "traj_required": false,
+    "traj_forbidden": true,
+    "traj_efficient": true,
+    "calls": [],
+    "verdict": null,
+    "final": "ERROR ValueError: unknown merchant; valid ids: ['ACME', 'BOLT', 'CRUX']",
+    "error": true,
+    "cheap": {
+      "faithful": false,
+      "currency_ok": false,
+      "clear_verdict": false,
+      "reason": "agent error"
+    },
+    "strong": null,
+    "tokens": 0,
+    "seconds": 2.8
+  }
+]

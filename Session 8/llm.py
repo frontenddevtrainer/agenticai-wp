@@ -7,7 +7,7 @@ from langchain_openrouter import ChatOpenRouter
 
 load_dotenv()  # reads OPENROUTER_API_KEY from .env
 
-MODEL = os.getenv("MODEL", "anthropic/claude-opus-5.5")
+MODEL = os.getenv("MODEL", "anthropic/claude-sonnet-5.5")
 MODEL_FAST = os.getenv("MODEL_FAST", "anthropic/claude-haiku-4.5")
 
 # Raw Anthropic SDK (as on Day 2)
