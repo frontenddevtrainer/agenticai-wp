@@ -1,0 +1,18 @@
+spring:
+  main:
+    web-application-type: none          # a command-line demo: no web server
+  ai:
+    openai:
+      api-key: ${OPENROUTER_API_KEY:none}
+      base-url: ${BASE_URL:https://openrouter.ai/api/v1}   # Spring AI 2.x appends /chat/completions (1.x appended /v1/...)
+      chat:
+        options:
+          model: ${MODEL:anthropic/claude-opus-5.5}
+          max-tokens: 4096
+  threads:
+    virtual:
+      enabled: true
+logging:
+  level:
+    root: warn
+    com.northstar: info
