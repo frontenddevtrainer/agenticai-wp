@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: settlement-desk
+  ai:
+    openai:
+      api-key: ${OPENROUTER_API_KEY}
+      base-url: https://openrouter.ai/api/v1       # Spring AI 2.x appends /chat/completions
+      chat:
+        options:
+          model: anthropic/claude-sonnet-5.5         # cheaper/faster for practice: anthropic/claude-sonnet-5.5
+          max-tokens: 4096
+          # don't set temperature / top-p / top-k: Claude 5.x rejects sampling params
+    # Step 3 (stretch): the Python MCP server from Day 9 (uncomment together with the pom dependency)
+    # mcp:
+    #   client:
+    #     type: SYNC
+    #     streamable-http:
+    #       connections:
+    #         northstar-kb:
+    #           url: http://localhost:8000
+    #           endpoint: /mcp
+  threads:
+    virtual:
+      enabled: true
