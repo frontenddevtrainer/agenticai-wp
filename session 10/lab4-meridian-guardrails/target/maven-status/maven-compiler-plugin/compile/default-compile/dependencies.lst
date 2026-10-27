@@ -1,0 +1,15 @@
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j/1.21.0/langchain4j-1.21.0.jar	465223:1790940717000
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j-core/1.21.0/langchain4j-core-1.21.0.jar	793396:1790938885000
+classpath:/Users/trainer/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar	3064:1785364862000
+classpath:/Users/trainer/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22.jar	84211:1780202688000
+classpath:/Users/trainer/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.22.1/jackson-core-2.22.1.jar	594171:1783459806000
+classpath:/Users/trainer/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.22.1/jackson-databind-2.22.1.jar	1706404:1783460779000
+classpath:/Users/trainer/.m2/repository/org/apache/opennlp/opennlp-tools/2.5.11/opennlp-tools-2.5.11.jar	1397282:1784639652000
+classpath:/Users/trainer/.m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar	69982:1778610849000
+classpath:/Users/trainer/.m2/repository/io/smallrye/reactive/mutiny-zero/1.3.1/mutiny-zero-1.3.1.jar	59215:1788444814000
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j-open-ai/1.21.0/langchain4j-open-ai-1.21.0.jar	381947:1790940716000
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j-http-client/1.21.0/langchain4j-http-client-1.21.0.jar	42190:1790940716000
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j-reactive-streaming/1.21.0-beta31/langchain4j-reactive-streaming-1.21.0-beta31.jar	9282:1790940716000
+classpath:/Users/trainer/.m2/repository/com/knuddels/jtokkit/1.1.0/jtokkit-1.1.0.jar	3246331:1721396784000
+classpath:/Users/trainer/.m2/repository/dev/langchain4j/langchain4j-http-client-jdk/1.21.0/langchain4j-http-client-jdk-1.21.0.jar	19408:1790940716000
+classpath:/Users/trainer/.m2/repository/org/slf4j/slf4j-simple/2.0.17/slf4j-simple-2.0.17.jar	15716:1740501810000
