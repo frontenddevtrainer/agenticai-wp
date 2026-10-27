@@ -1,0 +1,44 @@
+# Day 9 Lab 2: the Meridian stack. Run from meridian/:  docker compose -f deploy/docker-compose.yml up -d --build
+# First run:  docker compose -f deploy/docker-compose.yml exec ollama ollama pull nomic-embed-text
+#             docker compose -f deploy/docker-compose.yml run --rm mcp-server python ingest.py
+services:
+  chroma:
+    image: chromadb/chroma:1.5.9            # pin to match the Python client (check the Docker Hub tag)
+    volumes: ["chroma_data:/data"]
+    networks: [backend]
+
+  mcp-server:
+    build: { context: .., dockerfile: deploy/Dockerfile.mcp }
+    environment:
+      CHROMA_HOST: chroma
+      CHROMA_PORT: "8000"
+    secrets: [meridian_mcp_key, disputes_mcp_key, openrouter_api_key]
+    depends_on: [chroma]
+    networks: [backend, egress]             # egress only for openrouter.ai (restrict further with an egress proxy)
+    read_only: true
+    tmpfs: ["/tmp"]
+
+  agent:
+    build: { context: .., dockerfile: deploy/Dockerfile.agent }
+    ports: ["127.0.0.1:8080:8080"]         # only the agent API is reachable, and only from localhost
+    environment:
+      MCP_URL: http://mcp-server:8000/mcp
+    secrets: [openrouter_api_key, meridian_mcp_key]
+    depends_on: [mcp-server]
+    networks: [backend, egress]
+    read_only: true
+    tmpfs: ["/tmp"]
+
+networks:
+  backend:
+    internal: true                          # chroma and ollama get no internet
+  egress: {}
+
+volumes:
+  chroma_data: {}
+  ollama: {}
+
+secrets:                                    # create these files; deploy/secrets/ is git-ignored
+  openrouter_api_key: { file: ./secrets/openrouter_api_key.txt }
+  meridian_mcp_key:   { file: ./secrets/meridian_mcp_key.txt }
+  disputes_mcp_key:   { file: ./secrets/disputes_mcp_key.txt }

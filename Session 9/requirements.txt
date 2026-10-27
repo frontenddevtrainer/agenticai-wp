@@ -121,3 +121,4 @@ websockets==16.1.1
 xxhash==4.0.1
 yarl==1.25.1
 zstandard==0.25.0
+fastapi==0.156.4

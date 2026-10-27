@@ -1,0 +1,10 @@
+FROM python:3.13-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 MCP_HOST=0.0.0.0
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+RUN useradd -u 10001 -m app
+USER 10001
+EXPOSE 8000
+CMD ["sh", "-c", "export MERIDIAN_KEY=$(cat /run/secrets/meridian_mcp_key) DISPUTES_KEY=$(cat /run/secrets/disputes_mcp_key) OPENROUTER_API_KEY=$(cat /run/secrets/openrouter_api_key); exec python -m northstar_mcp.secure_server"]
